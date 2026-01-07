@@ -1,0 +1,1117 @@
+/* Стиль манги 90-х - черно-белая эстетика */
+:root {
+    --manga-black: #000000;
+    --manga-white: #FFFFFF;
+    --manga-gray-10: #1A1A1A;
+    --manga-gray-20: #2D2D2D;
+    --manga-gray-30: #404040;
+    --manga-gray-70: #B3B3B3;
+    --manga-gray-80: #CCCCCC;
+    --manga-gray-90: #E6E6E6;
+    --manga-red: #FF0000;
+    --manga-red-dark: #CC0000;
+    --halftone: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4"><circle cx="1" cy="1" r="1" fill="black" opacity="0.1"/></svg>');
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'M PLUS 1p', 'Noto Sans JP', 'DotGothic16', sans-serif;
+    background-color: var(--manga-white);
+    color: var(--manga-black);
+    line-height: 1.5;
+    overflow-x: hidden;
+    position: relative;
+    background-image: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 1px,
+            rgba(0,0,0,0.03) 1px,
+            rgba(0,0,0,0.03) 2px
+        );
+}
+
+.manga-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 10px 20px 40px;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Эффекты манги на заднем плане */
+.manga-effects {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.speed-lines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 20px,
+        rgba(0,0,0,0.07) 20px,
+        rgba(0,0,0,0.07) 21px
+    );
+    animation: speedLine 20s linear infinite;
+}
+
+.speed-lines.reverse {
+    animation: speedLineReverse 25s linear infinite;
+    opacity: 0.5;
+}
+
+@keyframes speedLine {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+
+@keyframes speedLineReverse {
+    0% { transform: translateY(100%); }
+    100% { transform: translateY(-100%); }
+}
+
+.action-lines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: 
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(0,0,0,0.05) 10px,
+            rgba(0,0,0,0.05) 12px
+        ),
+        repeating-linear-gradient(
+            -45deg,
+            transparent,
+            transparent 10px,
+            rgba(0,0,0,0.05) 10px,
+            rgba(0,0,0,0.05) 12px
+        );
+    opacity: 0.3;
+}
+
+.manga-text-bg {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    font-size: 120px;
+    font-weight: 900;
+    color: rgba(0,0,0,0.03);
+    transform: rotate(-15deg);
+    font-family: 'Noto Sans JP', sans-serif;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.manga-text-bg2 {
+    position: absolute;
+    bottom: 10%;
+    right: 5%;
+    font-size: 100px;
+    font-weight: 900;
+    color: rgba(0,0,0,0.02);
+    transform: rotate(10deg);
+    font-family: 'Noto Sans JP', sans-serif;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.halftone-pattern {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: var(--halftone);
+    opacity: 0.05;
+}
+
+/* Шапка в стиле манги */
+.manga-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid var(--manga-black);
+    position: relative;
+}
+
+.manga-header::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--manga-black);
+    opacity: 0.3;
+}
+
+.chapter-title {
+    text-transform: uppercase;
+}
+
+.chapter-num {
+    display: inline-block;
+    font-family: 'DotGothic16', monospace;
+    font-size: 14px;
+    background-color: var(--manga-black);
+    color: var(--manga-white);
+    padding: 4px 10px;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+    border: 2px solid var(--manga-black);
+    box-shadow: 3px 3px 0 var(--manga-gray-70);
+}
+
+.chapter-title h1 {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+}
+
+.chapter-title h1::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--manga-black) 70%, transparent 100%);
+}
+
+.chapter-sub {
+    font-family: 'DotGothic16', monospace;
+    font-size: 12px;
+    color: var(--manga-gray-30);
+    letter-spacing: 1px;
+}
+
+.manga-credits {
+    text-align: right;
+}
+
+.credits-box {
+    display: inline-block;
+    border: 2px solid var(--manga-black);
+    padding: 8px 15px;
+    background-color: var(--manga-white);
+    position: relative;
+    box-shadow: 4px 4px 0 var(--manga-gray-70);
+}
+
+.credits-box::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 1px solid var(--manga-black);
+    pointer-events: none;
+}
+
+.manga-by {
+    font-family: 'DotGothic16', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.volume-mark {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 30px;
+    height: 30px;
+    background-color: var(--manga-red);
+    color: var(--manga-white);
+    font-family: 'DotGothic16', monospace;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid var(--manga-black);
+    font-weight: bold;
+    box-shadow: 2px 2px 0 var(--manga-black);
+}
+
+/* Панели в стиле манги */
+.manga-panel {
+    background-color: var(--manga-white);
+    border: 3px solid var(--manga-black);
+    margin-bottom: 25px;
+    position: relative;
+    box-shadow: 8px 8px 0 var(--manga-gray-70);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.manga-panel:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 10px 10px 0 var(--manga-gray-70);
+}
+
+.manga-panel::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 1px solid var(--manga-black);
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: var(--manga-black);
+    color: var(--manga-white);
+    border-bottom: 3px solid var(--manga-black);
+}
+
+.panel-title {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.panel-title i {
+    color: var(--manga-red);
+}
+
+.panel-corner {
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+
+.corner-decoration {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-top: 20px solid var(--manga-red);
+    border-left: 20px solid transparent;
+    border-right: 20px solid var(--manga-red);
+    border-bottom: 20px solid transparent;
+}
+
+.panel-content {
+    padding: 20px;
+}
+
+/* Форма в стиле манги */
+.manga-form .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+@media (max-width: 768px) {
+    .manga-form .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-group {
+    position: relative;
+}
+
+.manga-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DotGothic16', monospace;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: var(--manga-gray-20);
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.manga-label i {
+    color: var(--manga-red);
+}
+
+.manga-bubble {
+    display: inline-block;
+    font-size: 10px;
+    background-color: var(--manga-red);
+    color: var(--manga-white);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-left: auto;
+    border: 1px solid var(--manga-black);
+}
+
+.manga-bubble.optional {
+    background-color: var(--manga-gray-70);
+}
+
+.manga-form input {
+    width: 100%;
+    padding: 12px 15px;
+    font-family: 'M PLUS 1p', sans-serif;
+    font-size: 16px;
+    background-color: var(--manga-white);
+    border: 2px solid var(--manga-black);
+    color: var(--manga-black);
+    outline: none;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.manga-form input:focus {
+    background-color: var(--manga-gray-90);
+    border-color: var(--manga-red);
+    box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.2);
+}
+
+.manga-form input::placeholder {
+    color: var(--manga-gray-70);
+    font-style: italic;
+}
+
+.manga-underline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--manga-black);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+}
+
+.manga-form input:focus + .manga-underline {
+    transform: scaleX(1);
+}
+
+/* Кнопки в стиле манги */
+.form-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.manga-btn {
+    flex: 1;
+    padding: 15px 25px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 3px solid var(--manga-black);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.manga-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s;
+}
+
+.manga-btn:hover::before {
+    left: 100%;
+}
+
+.primary-btn {
+    background-color: var(--manga-black);
+    color: var(--manga-white);
+    box-shadow: 5px 5px 0 var(--manga-gray-70);
+}
+
+.primary-btn:hover {
+    background-color: var(--manga-red);
+    border-color: var(--manga-red);
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 var(--manga-gray-70);
+}
+
+.cancel-btn {
+    background-color: var(--manga-white);
+    color: var(--manga-black);
+    box-shadow: 5px 5px 0 var(--manga-gray-70);
+}
+
+.cancel-btn:hover {
+    background-color: var(--manga-gray-90);
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 var(--manga-gray-70);
+}
+
+/* Эффект рядом с формой */
+.manga-side-effect {
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+}
+
+@media (min-width: 992px) {
+    .manga-side-effect {
+        display: block;
+    }
+}
+
+.effect-text {
+    font-family: 'DotGothic16', monospace;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--manga-red);
+    transform: rotate(15deg);
+    text-shadow: 2px 2px 0 var(--manga-black);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.sparkle {
+    position: absolute;
+    top: -20px;
+    right: 30px;
+    width: 20px;
+    height: 20px;
+    background-color: var(--manga-red);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    animation: sparkleSpin 2s linear infinite;
+}
+
+@keyframes sparkleSpin {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.2); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+/* Вкладки в стиле манги */
+.manga-tabs {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    background-color: var(--manga-gray-90);
+    border-top: 2px solid var(--manga-black);
+    border-bottom: 2px solid var(--manga-black);
+}
+
+.manga-tab {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 20px;
+    background-color: var(--manga-white);
+    border: 2px solid var(--manga-black);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--manga-black);
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.manga-tab::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: var(--manga-black);
+    transition: height 0.2s;
+    z-index: 0;
+}
+
+.manga-tab:hover::after {
+    height: 100%;
+}
+
+.manga-tab:hover .tab-text,
+.manga-tab:hover i {
+    color: var(--manga-white);
+    position: relative;
+    z-index: 1;
+}
+
+.manga-tab.active {
+    background-color: var(--manga-black);
+    color: var(--manga-white);
+    box-shadow: 4px 4px 0 var(--manga-gray-70);
+}
+
+.manga-tab.active i {
+    color: var(--manga-red);
+}
+
+.tab-text {
+    position: relative;
+    z-index: 1;
+}
+
+.tab-count {
+    background-color: var(--manga-red);
+    color: var(--manga-white);
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 10px;
+    border: 1px solid var(--manga-black);
+    margin-left: auto;
+}
+
+.spark-effect {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 20px;
+    color: var(--manga-red);
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s;
+}
+
+.manga-tab:hover .spark-effect {
+    opacity: 1;
+    transform: scale(1) rotate(20deg);
+}
+
+/* Список контактов в стиле манги */
+.manga-contact-list {
+    list-style: none;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.manga-contact-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.manga-contact-list::-webkit-scrollbar-track {
+    background-color: var(--manga-gray-90);
+    border-left: 1px solid var(--manga-black);
+}
+
+.manga-contact-list::-webkit-scrollbar-thumb {
+    background-color: var(--manga-black);
+}
+
+.contact-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 2px dashed var(--manga-gray-80);
+    transition: all 0.3s;
+    position: relative;
+    animation: slideIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.contact-item:nth-child(even) {
+    background-color: var(--manga-gray-90);
+}
+
+.contact-item:hover {
+    background-color: var(--manga-gray-80);
+    transform: translateX(5px);
+    border-bottom: 2px dashed var(--manga-red);
+}
+
+.contact-item::before {
+    content: '◀';
+    position: absolute;
+    left: -15px;
+    color: var(--manga-red);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.contact-item:hover::before {
+    opacity: 1;
+}
+
+.contact-info {
+    flex: 1;
+}
+
+.contact-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.contact-info h3 {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--manga-black);
+    position: relative;
+    display: inline-block;
+}
+
+.contact-info h3::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--manga-red);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+}
+
+.contact-item:hover .contact-info h3::after {
+    transform: scaleX(1);
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.contact-details p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'M PLUS 1p', sans-serif;
+    font-size: 15px;
+    color: var(--manga-gray-30);
+}
+
+.contact-details i {
+    color: var(--manga-red);
+    width: 20px;
+}
+
+.contact-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    width: 45px;
+    height: 45px;
+    border: 2px solid var(--manga-black);
+    background-color: var(--manga-white);
+    color: var(--manga-black);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.action-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--manga-black);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s;
+    z-index: 0;
+}
+
+.action-btn:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.action-btn:hover i {
+    color: var(--manga-white);
+    position: relative;
+    z-index: 1;
+}
+
+.btn-fav {
+    color: var(--manga-gray-70);
+}
+
+.contact-item.favorite .btn-fav {
+    color: var(--manga-red);
+    animation: favoritePulse 0.5s;
+}
+
+@keyframes favoritePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+}
+
+.btn-edit {
+    color: var(--manga-black);
+}
+
+.btn-delete {
+    color: var(--manga-black);
+}
+
+.action-btn:hover.btn-delete {
+    background-color: var(--manga-red);
+    border-color: var(--manga-red);
+}
+
+/* Состояние пустого списка */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-manga {
+    position: relative;
+}
+
+.manga-empty-img {
+    font-size: 80px;
+    color: var(--manga-gray-80);
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.empty-state h3 {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--manga-gray-30);
+}
+
+.empty-state p {
+    font-family: 'M PLUS 1p', sans-serif;
+    font-size: 16px;
+    color: var(--manga-gray-70);
+    margin-bottom: 20px;
+}
+
+.manga-effect {
+    display: inline-block;
+    font-family: 'DotGothic16', monospace;
+    font-size: 24px;
+    color: var(--manga-red);
+    padding: 10px 20px;
+    border: 2px solid var(--manga-black);
+    background-color: var(--manga-white);
+    box-shadow: 4px 4px 0 var(--manga-gray-70);
+    transform: rotate(-5deg);
+}
+
+/* Панель статистики */
+.panel-footer {
+    padding: 15px 20px;
+    background-color: var(--manga-gray-90);
+    border-top: 2px solid var(--manga-black);
+}
+
+.manga-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stat-label {
+    font-family: 'DotGothic16', monospace;
+    font-size: 14px;
+    color: var(--manga-gray-30);
+    letter-spacing: 1px;
+}
+
+.stat-value {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--manga-black);
+    background-color: var(--manga-white);
+    padding: 5px 15px;
+    border: 2px solid var(--manga-black);
+    box-shadow: 3px 3px 0 var(--manga-gray-70);
+}
+
+.page-counter {
+    font-family: 'DotGothic16', monospace;
+    font-size: 14px;
+    color: var(--manga-gray-30);
+    letter-spacing: 2px;
+}
+
+.page-num {
+    background-color: var(--manga-black);
+    color: var(--manga-white);
+    padding: 5px 10px;
+    border: 2px solid var(--manga-black);
+}
+
+/* Футер в стиле манги */
+.manga-footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 3px solid var(--manga-black);
+    position: relative;
+}
+
+.manga-footer::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--manga-black);
+    opacity: 0.3;
+}
+
+.footer-note {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.manga-sign {
+    font-family: 'DotGothic16', monospace;
+    font-size: 12px;
+    color: var(--manga-gray-30);
+    letter-spacing: 2px;
+}
+
+.footer-effects {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-effects .effect {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--manga-red);
+    background-color: var(--manga-white);
+    padding: 5px 10px;
+    border: 2px solid var(--manga-black);
+    transform: rotate(-3deg);
+    animation: effectFloat 4s ease-in-out infinite;
+}
+
+.footer-effects .effect:nth-child(2) {
+    animation-delay: 1s;
+    transform: rotate(2deg);
+}
+
+@keyframes effectFloat {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(-5px) rotate(-3deg); }
+}
+
+.next-chapter {
+    font-family: 'DotGothic16', monospace;
+    font-size: 12px;
+    color: var(--manga-gray-30);
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Всплывающие эффекты */
+.action-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background-color: var(--manga-white);
+    border: 3px solid var(--manga-black);
+    padding: 30px 50px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 900;
+    font-size: 24px;
+    color: var(--manga-red);
+    z-index: 1000;
+    box-shadow: 10px 10px 0 var(--manga-gray-70);
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+    text-align: center;
+}
+
+.action-popup.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    animation: popupPulse 0.5s;
+}
+
+@keyframes popupPulse {
+    0% { transform: translate(-50%, -50%) scale(0.8); }
+    50% { transform: translate(-50%, -50%) scale(1.1); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Эффект клика */
+.click-effect {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    pointer-events: none;
+    z-index: 1001;
+    animation: clickBurst 0.6s ease-out forwards;
+}
+
+@keyframes clickBurst {
+    0% {
+        opacity: 1;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
+
+/* Эффект перелистывания страницы */
+.page-flip {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1));
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .manga-header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .manga-credits {
+        text-align: center;
+    }
+    
+    .chapter-title h1 {
+        font-size: 24px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .manga-tabs {
+        flex-direction: column;
+    }
+    
+    .manga-stats {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .footer-note {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .manga-page {
+        padding: 10px 15px 30px;
+    }
+    
+    .panel-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .contact-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    
+    .contact-actions {
+        align-self: flex-end;
+    }
+}

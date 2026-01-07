@@ -2,40 +2,259 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Address Book WebSocket</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MANGA ADDRESS BOOK - 199X</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: sans-serif; padding: 20px; }
-        #messages { border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll; background: #f9f9f9; }
-        .msg { padding: 5px; border-bottom: 1px solid #eee; }
+        @import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=M+PLUS+1p:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap');
     </style>
 </head>
 <body>
-    <h2>Powiadomienia WebSocket</h2>
-    <div id="status">Connecting...</div>
-    <div id="messages"></div>
-
-    <script type="text/javascript">
-        var socket = new SockJS('/ws');
-        var stompClient = Stomp.over(socket);
-
-        stompClient.connect({}, function (frame) {
-            document.getElementById("status").innerText = "Connected";
-            console.log('Connected: ' + frame);
+    <div class="manga-page">
+        <!-- Манга-эффекты на заднем плане -->
+        <div class="manga-effects">
+            <div class="speed-lines"></div>
+            <div class="speed-lines reverse"></div>
+            <div class="action-lines"></div>
+            <div class="manga-text-bg">連絡先</div>
+            <div class="manga-text-bg2">アドレス帳</div>
+            <div class="halftone-pattern"></div>
+        </div>
+        
+        <!-- Верхняя панель как в манге -->
+        <div class="manga-header">
+            <div class="chapter-title">
+                <span class="chapter-num">第01話</span>
+                <h1>連絡先アドレス帳</h1>
+                <span class="chapter-sub">CONTACT ADDRESS BOOK - 199X EDITION</span>
+            </div>
+            <div class="manga-credits">
+                <div class="credits-box">
+                    <span class="manga-by">BY: WEB-MANGA STUDIO</span>
+                    <div class="volume-mark">VOL.1</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Главный контейнер в виде манга-панели -->
+        <div class="manga-container">
+            <!-- Панель формы -->
+            <div class="manga-panel form-panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <i class="fas fa-pen-nib"></i> 新規連絡先 / NEW CONTACT
+                    </div>
+                    <div class="panel-corner">
+                        <div class="corner-decoration"></div>
+                    </div>
+                </div>
+                
+                <div class="panel-content">
+                    <form id="contactForm" class="manga-form">
+                        <input type="hidden" id="contactId">
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="manga-label">
+                                    <i class="fas fa-user"></i> 名 / FIRST NAME
+                                    <span class="manga-bubble">必需!</span>
+                                </label>
+                                <input type="text" id="firstName" placeholder="例: 太郎 / TARO" required>
+                                <div class="manga-underline"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="manga-label">
+                                    <i class="fas fa-user"></i> 姓 / LAST NAME
+                                    <span class="manga-bubble">必需!</span>
+                                </label>
+                                <input type="text" id="lastName" placeholder="例: 山田 / YAMADA" required>
+                                <div class="manga-underline"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="manga-label">
+                                    <i class="fas fa-phone"></i> 電話 / PHONE
+                                    <span class="manga-bubble">必需!</span>
+                                </label>
+                                <input type="tel" id="phone" placeholder="例: 03-XXXX-XXXX" required>
+                                <div class="manga-underline"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="manga-label">
+                                    <i class="fas fa-envelope"></i> メール / EMAIL
+                                    <span class="manga-bubble optional">任意</span>
+                                </label>
+                                <input type="email" id="email" placeholder="例: taro@example.com">
+                                <div class="manga-underline"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="manga-btn primary-btn" id="submitBtn">
+                                <i class="fas fa-burst"></i> 追加！ / ADD CONTACT
+                            </button>
+                            <button type="button" class="manga-btn cancel-btn" id="cancelBtn" style="display:none;">
+                                <i class="fas fa-ban"></i> キャンセル / CANCEL
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <!-- Манга-эффект рядом с формой -->
+                    <div class="manga-side-effect">
+                        <div class="effect-text">入力!</div>
+                        <div class="sparkle"></div>
+                    </div>
+                </div>
+                
+                <div class="panel-footer">
+                    <div class="manga-note">
+                        <i class="fas fa-info-circle"></i> すべての連絡先はローカルストレージに保存されます。
+                    </div>
+                </div>
+            </div>
             
-            stompClient.subscribe('/topic/contacts', function (messageOutput) {
-                showMessage(messageOutput.body);
-            });
-        });
+            <!-- Панель вкладок -->
+            <div class="manga-panel tabs-panel">
+                <div class="manga-tabs">
+                    <button class="manga-tab active" data-tab="all">
+                        <i class="fas fa-users"></i>
+                        <span class="tab-text">全員 / ALL CONTACTS</span>
+                        <span class="tab-count" id="allCount">0</span>
+                    </button>
+                    <button class="manga-tab" data-tab="favorites">
+                        <i class="fas fa-star"></i>
+                        <span class="tab-text">お気に入り / FAVORITES</span>
+                        <span class="tab-count" id="favCount">0</span>
+                        <div class="spark-effect">★</div>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Панель списка контактов -->
+            <div class="manga-panel contacts-panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <i class="fas fa-address-book"></i> 連絡先リスト / CONTACT LIST
+                    </div>
+                    <div class="panel-action">
+                        <button class="action-btn" id="sortBtn" title="並び替え / SORT">
+                            <i class="fas fa-arrow-down-a-z"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="panel-content">
+                    <!-- Здесь будет динамически добавляться список контактов -->
+                    <ul id="contactList" class="manga-contact-list">
+                        <!-- Контакты будут добавляться сюда через JavaScript -->
+                        <div class="empty-state" id="emptyState">
+                            <div class="empty-manga">
+                                <div class="manga-empty-img">
+                                    <i class="fas fa-user-slash"></i>
+                                </div>
+                                <h3>連絡先がありません！</h3>
+                                <p>新しい連絡先を追加してください。</p>
+                                <div class="manga-effect">ガクッ</div>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+                
+                <div class="panel-footer">
+                    <div class="manga-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">総数:</span>
+                            <span class="stat-value" id="totalCount">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">お気に入り:</span>
+                            <span class="stat-value" id="favoritesCount">0</span>
+                        </div>
+                        <div class="page-counter">
+                            <span class="page-num">P.01</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Нижняя панель как в манге -->
+            <div class="manga-footer">
+                <div class="footer-note">
+                    <span class="manga-sign">© 199X WEB-MANGA STUDIO</span>
+                    <div class="footer-effects">
+                        <span class="effect">ドキドキ</span>
+                        <span class="effect">ワクワク</span>
+                    </div>
+                    <div class="next-chapter">
+                        <i class="fas fa-arrow-right"></i> NEXT: 検索機能 / SEARCH FEATURE
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Всплывающие эффекты для действий -->
+        <div class="action-popup" id="actionPopup">
+            <div class="popup-text">追加完了！</div>
+        </div>
+        
+        <!-- Эффект перелистывания страницы -->
+        <div class="page-flip"></div>
+    </div>
 
-        function showMessage(message) {
-            var response = document.getElementById('messages');
-            var p = document.createElement('div');
-            p.className = "msg";
-            p.appendChild(document.createTextNode(message));
-            response.appendChild(p);
-        }
+    <script src="js/store.js"></script>
+    <script src="js/view.js"></script>
+    <script src="js/app.js"></script>
+    
+    <!-- Дополнительный скрипт для манга-эффектов -->
+    <script>
+        // Добавляем манга-эффекты при взаимодействии
+        document.addEventListener('DOMContentLoaded', function() {
+            // Эффект при нажатии кнопок
+            const buttons = document.querySelectorAll('.manga-btn, .manga-tab, .action-btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Создаем эффект "всплеска"
+                    const effect = document.createElement('div');
+                    effect.className = 'click-effect';
+                    effect.innerHTML = '<i class="fas fa-burst"></i>';
+                    effect.style.left = (event.clientX - 20) + 'px';
+                    effect.style.top = (event.clientY - 20) + 'px';
+                    document.body.appendChild(effect);
+                    
+                    setTimeout(() => {
+                        effect.remove();
+                    }, 600);
+                });
+            });
+            
+            // Эффект при отправке формы
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function() {
+                    const popup = document.getElementById('actionPopup');
+                    popup.classList.add('show');
+                    popup.querySelector('.popup-text').textContent = '追加完了！';
+                    
+                    setTimeout(() => {
+                        popup.classList.remove('show');
+                    }, 1500);
+                });
+            }
+            
+            // Динамические линии скорости
+            function updateSpeedLines() {
+                const lines = document.querySelectorAll('.speed-line');
+                lines.forEach(line => {
+                    line.style.animationDuration = (Math.random() * 3 + 1) + 's';
+                });
+            }
+            
+            updateSpeedLines();
+            setInterval(updateSpeedLines, 3000);
+        });
     </script>
 </body>
 </html>
