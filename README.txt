@@ -79,5 +79,5 @@ Aby pobrać raport, wykonaj zapytanie GET na endpoint:
 ## Autory:
 * [Dmytro Ilchenko]
 * [Amirseit Kystaubay]
-grrtwewr
+
 
