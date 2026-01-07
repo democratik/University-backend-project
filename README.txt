@@ -6,19 +6,19 @@ Projekt zaliczeniowy z przedmiotu "Technologie backendowe". Aplikacja służy do
 
 Poniżej przedstawiono status realizacji poszczególnych punktów z zadania projektowego:
 
-- [x] **Kontrolery i klasy pomocnicze:** Zaimplementowano `ContactController` oraz warstwę serwisu `ContactService` oddzielającą logikę biznesową.
+- [x] **Kontrolery i klasy pomocnicze:** Zaimplementowano `ContactController` oraz warstwę serwisu `ContactService` oddzielającą logikę biznesową
 - [x] **Dokumentacja SWAGGER:** Dostępna pod adresem `/swagger-ui/index.html`.
 - [x] **Baza danych i JPA:**
-    - Wykorzystano Spring Data JPA.
-    - Zaimplementowano metody `findBy...` (Query Creation).
-    - Zaimplementowano `@Query` (JPQL).
-    - Zaimplementowano `nativeQuery` (SQL).
-- [x] **Logi aplikacji:** Zastosowano adnotację `@Slf4j` do logowania operacji (tworzenie, usuwanie, pobieranie danych).
-- [x] **Profile (dev i prod):** Skonfigurowano pliki `application-dev.properties` oraz `application-prod.properties`.
-- [x] **WebSocket:** Powiadomienia w czasie rzeczywistym o dodaniu nowego kontaktu.
-- [x] **Plik properties:** Konfiguracja aplikacji wydzielona do `application.properties`.
-- [x] **Generowanie raportu XLS:** Możliwość pobrania listy kontaktów w formacie Excel (Apache POI).
-- [x] **Integracja z repozytorium:** Kod źródłowy znajduje się w systemie kontroli wersji Git.
+    - Wykorzystano Spring Data JPA
+    - Zaimplementowano metody `findBy...` (Query Creation)
+    - Zaimplementowano `@Query` (JPQL)
+    - Zaimplementowano `nativeQuery` (SQL)
+- [x] **Logi aplikacji:** Zastosowano adnotację `@Slf4j` do logowania operacji (tworzenie, usuwanie, pobieranie danych)
+- [x] **Profile (dev i prod):** Skonfigurowano pliki `application-dev.properties` oraz `application-prod.properties`
+- [x] **WebSocket:** Powiadomienia w czasie rzeczywistym o dodaniu nowego kontaktu
+- [x] **Plik properties:** Konfiguracja aplikacji wydzielona do `application.properties`
+- [x] **Generowanie raportu XLS:** Możliwość pobrania listy kontaktów w formacie Excel (Apache POI)
+- [x] **Integracja z repozytorium:** Kod źródłowy znajduje się w systemie kontroli wersji Git
 
 ---
 
