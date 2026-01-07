@@ -1,5 +1,9 @@
 # Aplikacja Backendowa - Książka Adresowa (Address Book)
 
+## Autory:
+* [Dmytro Ilchenko]
+* [Amirseit Kystaubay]
+
 Projekt zaliczeniowy z przedmiotu "Technologie backendowe". Aplikacja służy do zarządzania kontaktami, oferując funkcjonalności CRUD, generowanie raportów oraz powiadomienia w czasie rzeczywistym.
 
 ## Realizacja Wymagań Projektowych
@@ -49,6 +53,11 @@ Poniżej przedstawiono status realizacji poszczególnych punktów z zadania proj
 
 ## Linki i Testowanie
 
+### UWAGA
+Nie otwieraj pliku `src/main/resources/static/index.html` bezpośrednio w przeglądarce (dwuklikiem) ani przy użyciu wtyczek typu "Live Server" (np. na porcie 5500). Spowoduje to błąd połączenia (CORS/404).
+Ponieważ plik jest serwowany jako zasób statyczny Spring Boot, **jedynym poprawnym adresem** do testowania jest:
+**http://localhost:8080/index.html**
+
 ### 1. Dokumentacja API (Swagger UI)
 Tutaj można testować wszystkie endpointy (dodawanie, usuwanie, pobieranie kontaktów oraz raportów).
 **http://localhost:8080/swagger-ui/index.html**
@@ -73,11 +82,5 @@ Prosta strona kliencka do odbierania powiadomień o nowych kontaktach.
 ### 4. Pobieranie Raportu Excel
 Aby pobrać raport, wykonaj zapytanie GET na endpoint:
 `/api/contacts/report` (dostępne również przez Swagger)
-
----
-
-## Autory:
-* [Dmytro Ilchenko]
-* [Amirseit Kystaubay]
 
 
