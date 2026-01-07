@@ -78,4 +78,4 @@ Aby pobrać raport, wykonaj zapytanie GET na endpoint:
 
 ## Autory:
 * [Dmytro Ilchenko]
-* [Amir я понятия не имею как пишиться твоя фамилия]
+* [Amirseit Kystaubay]
