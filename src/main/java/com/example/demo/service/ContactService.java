@@ -30,10 +30,16 @@ public class ContactService {
 
     public Contact createContact(Contact contact) {
         log.info("Tworzenie nowego kontaktu: {} {}", contact.getFirstName(), contact.getLastName());
+        
         Contact savedContact = contactRepository.save(contact);
 
-        String message = "Nowy kontakt został dodany: " + savedContact.getFirstName() + " " + savedContact.getLastName();
-        messagingTemplate.convertAndSend("/topic/contacts", message);
+        try {
+            String message = "Nowy kontakt został dodany: " + savedContact.getFirstName() + " " + savedContact.getLastName();
+            messagingTemplate.convertAndSend("/topic/contacts", message);
+            log.info("Wysłano powiadomienie WebSocket: {}", message);
+        } catch (Exception e) {
+            log.error("Błąd wysyłania WebSocket", e);
+        }
         
         return savedContact;
     }

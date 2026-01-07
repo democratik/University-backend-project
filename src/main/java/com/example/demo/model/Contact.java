@@ -30,4 +30,8 @@ public class Contact {
     private String phoneNumber;
 
     private String address;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id")
+    private Category category;
 }
