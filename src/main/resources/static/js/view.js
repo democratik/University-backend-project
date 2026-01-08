@@ -51,9 +51,6 @@ const view = {
                     </div>
                 </div>
                 <div class="contact-actions">
-                    <button class="action-btn btn-fav" data-action="toggleFav" title="Favorite">
-                        <i class="fas fa-star" style="pointer-events: none;"></i>
-                    </button>
                     <button class="action-btn btn-edit" data-action="edit" title="Edit">
                         <i class="fas fa-pen" style="pointer-events: none;"></i>
                     </button>

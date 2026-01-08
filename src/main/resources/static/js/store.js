@@ -12,7 +12,7 @@ const store = {
     },
 
     async add(contact) {
-        contact.category = { name: "MangaStyle" };
+        contact.category = { name: "inprogress" };
         
         const res = await fetch(API_URL, {
             method: 'POST',
@@ -25,7 +25,7 @@ const store = {
     },
 
     async update(contact) {
-        contact.category = { name: "MangaStyle" };
+        contact.category = { name: "inprogress" };
         
         const res = await fetch(API_URL, {
             method: 'POST', 

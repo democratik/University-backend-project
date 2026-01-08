@@ -11,7 +11,6 @@ Projekt zaliczeniowy z przedmiotu "Technologie backendowe". Aplikacja służy do
 Poniżej przedstawiono status realizacji poszczególnych punktów z zadania projektowego:
 
 - [x] **Kontrolery i klasy pomocnicze:** Zaimplementowano `ContactController` oraz warstwę serwisu `ContactService` oddzielającą logikę biznesową
-- [x] **Dokumentacja SWAGGER:** Dostępna pod adresem `/swagger-ui/index.html`.
 - [x] **Baza danych i JPA:**
     - Wykorzystano Spring Data JPA
     - Zaimplementowano metody `findBy...` (Query Creation)

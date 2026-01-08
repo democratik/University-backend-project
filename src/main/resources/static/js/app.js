@@ -9,15 +9,15 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
 
   const idRaw = document.getElementById('contactId').value;
   const id = idRaw ? Number(idRaw) : null;
-
   const contactData = {
     firstName: document.getElementById('firstName').value.trim(),
     lastName: document.getElementById('lastName').value.trim(),
-    phone: document.getElementById('phone').value.trim(),
-    email: document.getElementById('email').value.trim()
+    phoneNumber: document.getElementById('phone').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    category: { name: "inprogress" }
   };
 
-  if (!contactData.firstName || !contactData.lastName || !contactData.phone) {
+  if (!contactData.firstName || !contactData.lastName || !contactData.phoneNumber) {
     alert('Wypełnij imię, nazwisko i telefon');
     return;
   }
@@ -31,9 +31,12 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
     }
     view.resetForm();
     await refreshList();
+    
+    // Можна додати красиве повідомлення про успіх
+    console.log("Zapisano pomyślnie!"); 
   } catch (err) {
     console.error('Save failed', err);
-    alert('Nie udało się zapisać kontaktu');
+    alert('Nie udało się zapisać kontaktu: ' + err.message);
   }
 });
 
@@ -43,12 +46,15 @@ document.getElementById('cancelBtn').addEventListener('click', () => {
 
 document.getElementById('contactList').addEventListener('click', async (e) => {
   const target = e.target;
-  const action = target.dataset.action;
+  // Шукаємо кнопку, навіть якщо клікнули по іконці всередині
+  const btn = target.closest('.action-btn'); 
   const li = target.closest('.contact-item');
 
-  if (!li || !action) return;
+  if (!li || !btn) return;
 
+  const action = btn.dataset.action; // Беремо action з кнопки
   const id = Number(li.dataset.id);
+  
   if (Number.isNaN(id)) return;
 
   try {
@@ -76,20 +82,14 @@ document.getElementById('contactList').addEventListener('click', async (e) => {
   }
 });
 
-// Вкладки
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', async (e) => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    e.target.classList.add('active');
-    currentTab = e.target.dataset.tab;
-    await refreshList();
-  });
-});
-
 async function refreshList() {
   try {
     let contacts = await store.getContacts();
-    if (currentTab === 'favorites') contacts = contacts.filter(c => Boolean(c.isFavorite));
+    // Фільтрація обраних (якщо треба)
+    if (currentTab === 'favorites') {
+        // Оскільки в базі немає поля isFavorite, це поки просто імітація
+        // contacts = contacts.filter(c => c.isFavorite); 
+    }
     view.renderList(contacts);
   } catch (err) {
     console.error('refreshList failed', err);

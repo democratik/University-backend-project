@@ -1,4 +1,3 @@
-/* Стиль манги 90-х - черно-белая эстетика */
 :root {
     --manga-black: #000000;
     --manga-white: #FFFFFF;
@@ -44,7 +43,6 @@ body {
     min-height: 100vh;
 }
 
-/* Эффекты манги на заднем плане */
 .manga-effects {
     position: fixed;
     top: 0;
@@ -54,35 +52,6 @@ body {
     pointer-events: none;
     z-index: -1;
     overflow: hidden;
-}
-
-.speed-lines {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-        to bottom,
-        transparent,
-        transparent 20px,
-        rgba(0,0,0,0.07) 20px,
-        rgba(0,0,0,0.07) 21px
-    );
-    animation: speedLine 20s linear infinite;
-}
-
-.speed-lines.reverse {
-    animation: speedLineReverse 25s linear infinite;
-    opacity: 0.5;
-}
-
-@keyframes speedLine {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100%); }
-}
-
-@keyframes speedLineReverse {
-    0% { transform: translateY(100%); }
-    100% { transform: translateY(-100%); }
 }
 
 .action-lines {
@@ -185,26 +154,10 @@ body {
     font-size: 32px;
     font-weight: 900;
     margin-bottom: 5px;
+    padding-left: 10px;
     letter-spacing: 1px;
     position: relative;
     display: inline-block;
-}
-
-.chapter-title h1::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, var(--manga-black) 70%, transparent 100%);
-}
-
-.chapter-sub {
-    font-family: 'DotGothic16', monospace;
-    font-size: 12px;
-    color: var(--manga-gray-30);
-    letter-spacing: 1px;
 }
 
 .manga-credits {
@@ -235,25 +188,6 @@ body {
     font-family: 'DotGothic16', monospace;
     font-size: 12px;
     letter-spacing: 1px;
-}
-
-.volume-mark {
-    position: absolute;
-    top: -15px;
-    right: -15px;
-    width: 30px;
-    height: 30px;
-    background-color: var(--manga-red);
-    color: var(--manga-white);
-    font-family: 'DotGothic16', monospace;
-    font-size: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    border: 2px solid var(--manga-black);
-    font-weight: bold;
-    box-shadow: 2px 2px 0 var(--manga-black);
 }
 
 /* Панели в стиле манги */
@@ -335,12 +269,6 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 25px;
     margin-bottom: 25px;
-}
-
-@media (max-width: 768px) {
-    .manga-form .form-grid {
-        grid-template-columns: 1fr;
-    }
 }
 
 .form-group {
@@ -483,54 +411,6 @@ body {
     box-shadow: 7px 7px 0 var(--manga-gray-70);
 }
 
-/* Эффект рядом с формой */
-.manga-side-effect {
-    position: absolute;
-    right: -40px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: none;
-}
-
-@media (min-width: 992px) {
-    .manga-side-effect {
-        display: block;
-    }
-}
-
-.effect-text {
-    font-family: 'DotGothic16', monospace;
-    font-size: 18px;
-    font-weight: bold;
-    color: var(--manga-red);
-    transform: rotate(15deg);
-    text-shadow: 2px 2px 0 var(--manga-black);
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-}
-
-.sparkle {
-    position: absolute;
-    top: -20px;
-    right: 30px;
-    width: 20px;
-    height: 20px;
-    background-color: var(--manga-red);
-    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    animation: sparkleSpin 2s linear infinite;
-}
-
-@keyframes sparkleSpin {
-    0% { transform: rotate(0deg) scale(1); }
-    50% { transform: rotate(180deg) scale(1.2); }
-    100% { transform: rotate(360deg) scale(1); }
-}
-
-/* Вкладки в стиле манги */
 .manga-tabs {
     display: flex;
     gap: 10px;
@@ -650,7 +530,6 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    border-bottom: 2px dashed var(--manga-gray-80);
     transition: all 0.3s;
     position: relative;
     animation: slideIn 0.5s ease forwards;
@@ -1024,28 +903,6 @@ body {
     100% { transform: translate(-50%, -50%) scale(1); }
 }
 
-/* Эффект клика */
-.click-effect {
-    position: fixed;
-    width: 40px;
-    height: 40px;
-    pointer-events: none;
-    z-index: 1001;
-    animation: clickBurst 0.6s ease-out forwards;
-}
-
-@keyframes clickBurst {
-    0% {
-        opacity: 1;
-        transform: scale(0.5);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(2);
-    }
-}
-
-/* Эффект перелистывания страницы */
 .page-flip {
     position: fixed;
     top: 0;
@@ -1055,63 +912,4 @@ body {
     background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1));
     pointer-events: none;
     z-index: 10;
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-    .manga-header {
-        flex-direction: column;
-        gap: 20px;
-        text-align: center;
-    }
-    
-    .manga-credits {
-        text-align: center;
-    }
-    
-    .chapter-title h1 {
-        font-size: 24px;
-    }
-    
-    .form-actions {
-        flex-direction: column;
-    }
-    
-    .manga-tabs {
-        flex-direction: column;
-    }
-    
-    .manga-stats {
-        flex-direction: column;
-        gap: 15px;
-        align-items: flex-start;
-    }
-    
-    .footer-note {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .manga-page {
-        padding: 10px 15px 30px;
-    }
-    
-    .panel-header {
-        flex-direction: column;
-        gap: 15px;
-        align-items: flex-start;
-    }
-    
-    .contact-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-    }
-    
-    .contact-actions {
-        align-self: flex-end;
-    }
 }
