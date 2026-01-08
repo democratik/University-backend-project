@@ -32,7 +32,6 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
     view.resetForm();
     await refreshList();
     
-    // Можна додати красиве повідомлення про успіх
     console.log("Zapisano pomyślnie!"); 
   } catch (err) {
     console.error('Save failed', err);
@@ -46,13 +45,12 @@ document.getElementById('cancelBtn').addEventListener('click', () => {
 
 document.getElementById('contactList').addEventListener('click', async (e) => {
   const target = e.target;
-  // Шукаємо кнопку, навіть якщо клікнули по іконці всередині
   const btn = target.closest('.action-btn'); 
   const li = target.closest('.contact-item');
 
   if (!li || !btn) return;
 
-  const action = btn.dataset.action; // Беремо action з кнопки
+  const action = btn.dataset.action;
   const id = Number(li.dataset.id);
   
   if (Number.isNaN(id)) return;
@@ -85,10 +83,8 @@ document.getElementById('contactList').addEventListener('click', async (e) => {
 async function refreshList() {
   try {
     let contacts = await store.getContacts();
-    // Фільтрація обраних (якщо треба)
     if (currentTab === 'favorites') {
-        // Оскільки в базі немає поля isFavorite, це поки просто імітація
-        // contacts = contacts.filter(c => c.isFavorite); 
+      // dodać później
     }
     view.renderList(contacts);
   } catch (err) {

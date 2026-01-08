@@ -3,7 +3,7 @@ const view = {
         document.getElementById('contactForm').reset();
         document.getElementById('contactId').value = '';
         document.getElementById('cancelBtn').style.display = 'none';
-        document.getElementById('submitBtn').innerHTML = '<i class="fas fa-burst"></i> 追加！ / ADD CONTACT';
+        document.getElementById('submitBtn').innerHTML = '<i class="fas fa-burst"></i> ADD CONTACT';
     },
 
     fillForm(contact) {
@@ -14,7 +14,7 @@ const view = {
         document.getElementById('email').value = contact.email;
         
         document.getElementById('cancelBtn').style.display = 'inline-block';
-        document.getElementById('submitBtn').innerHTML = '<i class="fas fa-save"></i> 保存 / SAVE';
+        document.getElementById('submitBtn').innerHTML = '<i class="fas fa-save"></i> SAVE';
     },
 
     renderList(contacts) {
@@ -22,7 +22,7 @@ const view = {
         const emptyState = document.getElementById('emptyState');
         const totalCount = document.getElementById('totalCount');
         
-        totalCount.innerText = contacts.length;
+        totalCount.innerText = contacts.length; // лічильник
         
         list.innerHTML = '';
 
@@ -36,7 +36,7 @@ const view = {
 
         contacts.forEach(c => {
             const li = document.createElement('li');
-            li.className = 'contact-item';
+            li.className = 'contact-item'; 
             li.dataset.id = c.id;
             
             li.innerHTML = `
@@ -45,16 +45,15 @@ const view = {
                         <h3>${c.firstName} ${c.lastName}</h3>
                     </div>
                     <div class="contact-details">
-                        <p><i class="fas fa-phone"></i> ${c.phoneNumber}</p>
-                        ${c.email ? `<p><i class="fas fa-envelope"></i> ${c.email}</p>` : ''}
-                        ${c.category ? `<p><i class="fas fa-tag"></i> ${c.category.name}</p>` : ''}
+                        <span><i class="fas fa-phone"></i> ${c.phoneNumber}</span>
+                        ${c.email ? `<span><i class="fas fa-envelope"></i> ${c.email}</span>` : ''}
                     </div>
                 </div>
-                <div class="contact-actions">
-                    <button class="action-btn btn-edit" data-action="edit" title="Edit">
+                <div class="action-buttons">
+                    <button class="icon-btn action-btn" data-action="edit" title="Edytuj">
                         <i class="fas fa-pen" style="pointer-events: none;"></i>
                     </button>
-                    <button class="action-btn btn-delete" data-action="delete" title="Delete">
+                    <button class="icon-btn delete-btn action-btn" data-action="delete" title="Usuń">
                         <i class="fas fa-trash" style="pointer-events: none;"></i>
                     </button>
                 </div>

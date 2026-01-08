@@ -3,139 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADDRESS BOOK project</title>
+    <title>System Zarządzania Kontaktami</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=M+PLUS+1p:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap');
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="manga-page">
-        <div class="manga-header">
-            <div class="chapter-title">
-                <span class="chapter-num">ROZDZIAŁ 01</span>
-                <h1>KSIĄŻKA ADRESOWA</h1>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-brand">
+                <i class="fas fa-address-card"></i>
+                <h1>Książka Adresowa</h1>
             </div>
-            <div class="manga-credits">
-                <div class="credits-box">
-                    <span class="manga-by">BY: WSPA Students</span>
-                </div>
+            <div class="header-meta">
+                <span class="version-badge">v1.0</span>
             </div>
-        </div>
+        </header>
         
-        <div class="manga-container">
-            <div class="manga-panel form-panel">
-                <div class="panel-header">
-                    <div class="panel-title">
-                        <i class="fas fa-pen-nib"></i> NOWY KONTAKT
-                    </div>
-                    <div class="panel-corner">
-                        <div class="corner-decoration"></div>
-                    </div>
+        <main class="main-content">
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-user-plus"></i> Nowy Kontakt
+                    </h2>
                 </div>
                 
-                <div class="panel-content">
-                    <form id="contactForm" class="manga-form">
+                <div class="card-body">
+                    <form id="contactForm" class="contact-form">
                         <input type="hidden" id="contactId">
                         
                         <div class="form-grid">
                             <div class="form-group">
-                                <label class="manga-label">
-                                    <i class="fas fa-user"></i> IMIĘ
-                                    <span class="manga-bubble">WYMAGANE!</span>
-                                </label>
-                                <input type="text" id="firstName" placeholder="Np.: Jan / JAN" required>
-                                <div class="manga-underline"></div>
+                                <label for="firstName" class="form-label">Imię <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <input type="text" id="firstName" class="form-control" placeholder="np. Jan" required>
+                                </div>
                             </div>
                             
                             <div class="form-group">
-                                <label class="manga-label">
-                                    <i class="fas fa-user"></i> NAZWISKO
-                                    <span class="manga-bubble">WYMAGANE!</span>
-                                </label>
-                                <input type="text" id="lastName" placeholder="Np.: Kowalski / KOWALSKI" required>
-                                <div class="manga-underline"></div>
+                                <label for="lastName" class="form-label">Nazwisko <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <input type="text" id="lastName" class="form-control" placeholder="np. Kowalski" required>
+                                </div>
                             </div>
                             
                             <div class="form-group">
-                                <label class="manga-label">
-                                    <i class="fas fa-phone"></i> TELEFON
-                                    <span class="manga-bubble">WYMAGANE!</span>
-                                </label>
-                                <input type="tel" id="phone" placeholder="Np.: 123-456-789" required>
-                                <div class="manga-underline"></div>
+                                <label for="phone" class="form-label">Telefon <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <input type="tel" id="phone" class="form-control" placeholder="123-456-789" required>
+                                </div>
                             </div>
                             
                             <div class="form-group">
-                                <label class="manga-label">
-                                    <i class="fas fa-envelope"></i> EMAIL
-                                    <span class="manga-bubble optional">OPCJA</span>
-                                </label>
-                                <input type="email" id="email" placeholder="Np.: jan@gmail.com">
-                                <div class="manga-underline"></div>
+                                <label for="email" class="form-label">Email <span class="optional">(Opcjonalnie)</span></label>
+                                <div class="input-wrapper">
+                                    <input type="email" id="email" class="form-control" placeholder="jan@example.com">
+                                </div>
                             </div>
                         </div>
                         
                         <div class="form-actions">
-                            <button type="submit" class="manga-btn primary-btn" id="submitBtn">
-                                <i class="fas fa-burst"></i> DODAJ!
+                            <button type="submit" class="btn btn-primary" id="submitBtn">
+                                <i class="fas fa-save"></i> Zapisz
                             </button>
-                            <button type="button" class="manga-btn cancel-btn" id="cancelBtn" style="display:none;">
-                                <i class="fas fa-ban"></i> ANULUJ
+                            <button type="button" class="btn btn-secondary" id="cancelBtn" style="display:none;">
+                                <i class="fas fa-times"></i> Anuluj
                             </button>
                         </div>
                     </form>
                 </div>
-            </div>
+            </section>
             
-            <div class="manga-panel contacts-panel">
-                <div class="panel-header">
-                    <div class="panel-title">
-                        <i class="fas fa-address-book"></i> LISTA KONTAKTÓW / CONTACT LIST
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-list"></i> Lista Kontaktów
+                    </h2>
+                    <div class="card-actions">
+                         <span class="stat-badge">Łącznie: <strong id="totalCount">0</strong></span>
                     </div>
                 </div>
                 
-                <div class="panel-content">
-                    <ul id="contactList" class="manga-contact-list">
+                <div class="card-body p-0">
+                    <ul id="contactList" class="contact-list">
                         <div class="empty-state" id="emptyState">
-                            <div class="empty-manga">
-                                <div class="manga-empty-img">
-                                    <i class="fas fa-user-slash"></i>
-                                </div>
-                                <h3>BRAK KONTAKTÓW!</h3>
-                                <p>Proszę dodać nowy kontakt.</p>
-                                <div class="manga-effect">PUSTKA...</div>
+                            <div class="empty-icon">
+                                <i class="fas fa-inbox"></i>
                             </div>
+                            <h3>Brak kontaktów</h3>
+                            <p>Lista jest pusta</p>
                         </div>
                     </ul>
                 </div>
-                
-                <div class="panel-footer">
-                    <div class="manga-stats">
-                            <div class="stat-item">
-                                <span class="stat-label">Łącznie:</span>
-                                <span class="stat-value" id="totalCount">0</span>
-                            </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="manga-footer">
-                <div class="footer-note">
-                    <span class="manga-sign">© 199X WEB-WSPA STUDIO</span>
-                    <div class="next-chapter">
-                        <i class="fas fa-arrow-right"></i> NASTĘPNIE: FUNKCJA SZUKANIA / SEARCH FEATURE
-                    </div>
-                </div>
-            </div>
-        </div>
+            </section>
+        </main>
         
-        <div class="action-popup" id="actionPopup">
-            <div class="popup-text">DODANO!</div>
+        <div class="toast" id="actionPopup">
+            <i class="fas fa-check-circle"></i>
+            <span>Operacja zakończona sukcesem!</span>
         </div>
-        
-        <div class="page-flip"></div>
     </div>
 
     <script src="js/store.js"></script>
