@@ -1,5 +1,4 @@
 const view = {
-    // Wyczyść formularz
     resetForm() {
         document.getElementById('contactForm').reset();
         document.getElementById('contactId').value = '';
@@ -7,28 +6,24 @@ const view = {
         document.getElementById('submitBtn').innerHTML = '<i class="fas fa-burst"></i> 追加！ / ADD CONTACT';
     },
 
-    // Wypełnij formularz do edycji
     fillForm(contact) {
         document.getElementById('contactId').value = contact.id;
         document.getElementById('firstName').value = contact.firstName;
         document.getElementById('lastName').value = contact.lastName;
-        document.getElementById('phone').value = contact.phoneNumber; // Zwróć uwagę na nazwę pola z backendu (phoneNumber)
+        document.getElementById('phone').value = contact.phoneNumber;
         document.getElementById('email').value = contact.email;
         
         document.getElementById('cancelBtn').style.display = 'inline-block';
         document.getElementById('submitBtn').innerHTML = '<i class="fas fa-save"></i> 保存 / SAVE';
     },
 
-    // Wygeneruj listę kontaktów
     renderList(contacts) {
         const list = document.getElementById('contactList');
         const emptyState = document.getElementById('emptyState');
         const totalCount = document.getElementById('totalCount');
         
-        // Statystyki
         totalCount.innerText = contacts.length;
         
-        // Czyść listę
         list.innerHTML = '';
 
         if (contacts.length === 0) {
@@ -39,11 +34,10 @@ const view = {
         
         emptyState.style.display = 'none';
 
-        // Generuj HTML dla każdego kontaktu
         contacts.forEach(c => {
             const li = document.createElement('li');
             li.className = 'contact-item';
-            li.dataset.id = c.id; // Ważne dla delegowania zdarzeń w app.js
+            li.dataset.id = c.id;
             
             li.innerHTML = `
                 <div class="contact-info">

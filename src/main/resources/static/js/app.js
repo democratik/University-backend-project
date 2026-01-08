@@ -1,14 +1,9 @@
-// app.js
 let currentTab = 'all';
 
 document.addEventListener('DOMContentLoaded', async () => {
-  // Пытаемся синхронизировать локал с сервером при старте (опционально)
-  // await store.syncFromLocalToServer();
-
   await refreshList();
 });
 
-// Форма submit
 document.getElementById('contactForm').addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -23,7 +18,7 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
   };
 
   if (!contactData.firstName || !contactData.lastName || !contactData.phone) {
-    alert('Wypełnij imię, nazwisko i telefon.');
+    alert('Wypełnij imię, nazwisko i telefon');
     return;
   }
 
@@ -38,16 +33,14 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
     await refreshList();
   } catch (err) {
     console.error('Save failed', err);
-    alert('Nie udało się zapisać kontaktu.');
+    alert('Nie udało się zapisać kontaktu');
   }
 });
 
-// Кнопка отмены
 document.getElementById('cancelBtn').addEventListener('click', () => {
   view.resetForm();
 });
 
-// Обработчик кликов в списке (делегирование)
 document.getElementById('contactList').addEventListener('click', async (e) => {
   const target = e.target;
   const action = target.dataset.action;
@@ -73,13 +66,13 @@ document.getElementById('contactList').addEventListener('click', async (e) => {
         view.fillForm(contact);
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
-        alert('Kontakt nie istnieje.');
+        alert('Kontakt nie istnieje');
         await refreshList();
       }
     }
   } catch (err) {
     console.error('Action failed', err);
-    alert('Operacja nie powiodła się.');
+    alert('Operacja nie powiodła się');
   }
 });
 
