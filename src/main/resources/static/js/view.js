@@ -3,7 +3,6 @@ const view = {
         document.getElementById('contactForm').reset();
         document.getElementById('contactId').value = '';
         document.getElementById('cancelBtn').style.display = 'none';
-        document.getElementById('submitBtn').innerHTML = '<i class="fas fa-burst"></i> ADD CONTACT';
     },
 
     fillForm(contact) {

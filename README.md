@@ -1,85 +1,49 @@
-# Aplikacja Backendowa - Książka Adresowa (Address Book)
+# Książka Adresowa
 
-## Autory:
-* [Dmytro Ilchenko]
-* [Amirseit Kystaubay]
+**Autorzy:**
+* Dmytro Ilchenko
+* Amirseit Kystaubay
 
-Projekt zaliczeniowy z przedmiotu "Technologie backendowe". Aplikacja służy do zarządzania kontaktami, oferując funkcjonalności CRUD, generowanie raportów oraz powiadomienia w czasie rzeczywistym.
 
-## Realizacja Wymagań Projektowych
+## Główne Funkcjonalności
 
-Poniżej przedstawiono status realizacji poszczególnych punktów z zadania projektowego:
+Aplikacja realizuje wszystkie wymagania projektowe, w tym:
+* **Pełny CRUD:** Dodawanie, edycja, usuwanie i wyświetlanie kontaktów.
+* **Relacje w bazie danych:** Kontakty przypisane do kategorii (relacja `@OneToMany`).
+* **Zaawansowane wyszukiwanie:** Wykorzystanie Spring Data JPA, JPQL oraz Native Queries.
+* **WebSocket:** Automatyczne odświeżanie listy kontaktów u wszystkich klientów po dodaniu wpisu.
+* **Raporty Excel:** Generowanie i pobieranie listy kontaktów w formacie `.xlsx` (Apache POI).
+* **Nowoczesny UI:** Responsywny interfejs webowy (HTML/CSS/JS) w stylu "Clean SaaS".
+* **Profile i Logi:** Skonfigurowane środowiska (dev/prod) oraz logowanie operacji.
 
-- [x] **Kontrolery i klasy pomocnicze:** Zaimplementowano `ContactController` oraz warstwę serwisu `ContactService` oddzielającą logikę biznesową
-- [x] **Baza danych i JPA:**
-    - Wykorzystano Spring Data JPA
-    - Zaimplementowano metody `findBy...` (Query Creation)
-    - Zaimplementowano `@Query` (JPQL)
-    - Zaimplementowano `nativeQuery` (SQL)
-- [x] **Logi aplikacji:** Zastosowano adnotację `@Slf4j` do logowania operacji (tworzenie, usuwanie, pobieranie danych)
-- [x] **Profile (dev i prod):** Skonfigurowano pliki `application-dev.properties` oraz `application-prod.properties`
-- [x] **WebSocket:** Powiadomienia w czasie rzeczywistym o dodaniu nowego kontaktu
-- [x] **Plik properties:** Konfiguracja aplikacji wydzielona do `application.properties`
-- [x] **Generowanie raportu XLS:** Możliwość pobrania listy kontaktów w formacie Excel (Apache POI)
-- [x] **Integracja z repozytorium:** Kod źródłowy znajduje się w systemie kontroli wersji Git
-
----
 
 ## Technologie
 
-* **Java 17**
-* **Spring Boot 3.x** (Web, Data JPA, Validation, WebSocket)
-* **H2 Database** (In-memory database dla profilu dev)
-* **Lombok** (Redukcja boilerplate code)
-* **Apache POI** (Generowanie plików Excel)
-* **OpenAPI / Swagger** (Dokumentacja API)
+* **Java 17** & **Spring Boot 3.x**
+* **Baza danych:** H2 (In-memory)
+* **Frontend:** Vanilla JS, CSS3, HTML5
+* **Narzędzia:** Lombok, Apache POI (Excel), Swagger/OpenAPI
 
----
 
 ## Instrukcja Uruchomienia
 
-1.  **Sklonuj repozytorium:**
+1.  **Uruchom aplikację** (korzystając z Maven Wrapper):
     ```bash
-    git clone [https://github.com/twoj-nick/twoj-projekt.git](https://github.com/twoj-nick/twoj-projekt.git)
+    ./mvnw clean spring-boot:run
     ```
-2.  **Uruchom aplikację** (korzystając z Maven Wrapper):
-    ```bash
-    ./mvnw spring-boot:run
-    ```
-3.  Aplikacja domyślnie startuje na porcie **8080**.
-
----
-
-## Linki i Testowanie
-
-### UWAGA
-Nie otwieraj pliku `src/main/resources/static/index.html` bezpośrednio w przeglądarce (dwuklikiem) ani przy użyciu wtyczek typu "Live Server" (np. na porcie 5500). Spowoduje to błąd połączenia (CORS/404).
-Ponieważ plik jest serwowany jako zasób statyczny Spring Boot, **jedynym poprawnym adresem** do testowania jest:
-**http://localhost:8080/index.html**
-
-### 1. Dokumentacja API (Swagger UI)
-Tutaj można testować wszystkie endpointy (dodawanie, usuwanie, pobieranie kontaktów oraz raportów).
-**http://localhost:8080/swagger-ui/index.html**
-
-2. Baza Danych (H2 Console)
-Podgląd bazy danych w pamięci
-**http://localhost:8080/h2-console**
-* **JDBC URL:** `jdbc:h2:mem:addressbookdb`
-* **User:** `sa`
-* **Password:** `password`
-
-### 3. Testowanie WebSocket
-Prosta strona kliencka do odbierania powiadomień o nowych kontaktach.
-**http://localhost:8080/index.html**
-
-**Jak przetestować:**
-1. Otwórz stronę `index.html` w przeglądarce.
-2. Poczekaj na status "Connected".
-3. W osobnej karcie (przez Swagger) wyślij żądanie `POST` tworzące nowy kontakt.
-4. Na stronie `index.html` pojawi się powiadomienie.
-
-### 4. Pobieranie Raportu Excel
-Aby pobrać raport, wykonaj zapytanie GET na endpoint:
-`/api/contacts/report` (dostępne również przez Swagger)
+2.  Aplikacja uruchomi się na porcie **8080**.
 
 
+## Linki do Aplikacji
+Interfejs użytkownika jest serwowany bezpośrednio przez Spring Boot
+Nie używaj wtyczek typu "Live Server" ani nie otwieraj pliku `.html` z dysku
+
+**Główna aplikacja (Interfejs):**
+[http://localhost:8080/index.html]
+
+**Dokumentacja API (Swagger UI):**
+[http://localhost:8080/swagger-ui/index.html]
+
+**Konsola Bazy Danych (H2):**
+[http://localhost:8080/h2-console]
+*(JDBC URL: `jdbc:h2:mem:addressbookdb`, User: `sa`, Password: `password`)*
