@@ -1,5 +1,8 @@
 # Książka Adresowa
 
+**LINK NA GITHUB**
+[https://github.com/democratik/University-backend-project](https://github.com/democratik/University-backend-project)
+
 **Autorzy:**
 * Dmytro Ilchenko
 * Amirseit Kystaubay
@@ -39,11 +42,11 @@ Interfejs użytkownika jest serwowany bezpośrednio przez Spring Boot
 Nie używaj wtyczek typu "Live Server" ani nie otwieraj pliku `.html` z dysku
 
 **Główna aplikacja (Interfejs):**
-[http://localhost:8080/index.html]
+[http://localhost:8080/index.html](http://localhost:8080/index.html)
 
 **Dokumentacja API (Swagger UI):**
-[http://localhost:8080/swagger-ui/index.html]
+[http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 
 **Konsola Bazy Danych (H2):**
-[http://localhost:8080/h2-console]
+[http://localhost:8080/h2-console](http://localhost:8080/h2-console)
 *(JDBC URL: `jdbc:h2:mem:addressbookdb`, User: `sa`, Password: `password`)*
